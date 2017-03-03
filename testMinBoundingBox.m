@@ -12,7 +12,7 @@ gtFile = fullfile(txtBase, [imgID, '.txt']);
 imgFile = fullfile(imgBase, [imgID, '.jpg']);
 gtPoints  = loadGTFromTxtFile(gtFile);
 gtPointsBox = gtPoints;
-gtP = reshape(gtPoints', [2, size(gtPoints, 1)*2]);
+gtP = reshape(gtPoints', [2, size(gtPoints, 1)*2]); % these only has 2 points!!!
 img = imread(imgFile);
 imshow(img);
 %displayBox(gtPointsBox, 'm');
