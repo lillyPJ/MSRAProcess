@@ -5,6 +5,9 @@ cla;
 txtBase = '/home/lili/datasets/shopSign/gt/test/txt';
 imgBase = '/home/lili/datasets/shopSign/img/test';
 imgID = 'xm_0220';
+% %imgID = 'xm_0388';
+% imgID = 'xm_0256';
+% imgID = 'xm_0487';
 gtFile = fullfile(txtBase, [imgID, '.txt']);
 imgFile = fullfile(imgBase, [imgID, '.jpg']);
 gtPoints  = loadGTFromTxtFile(gtFile);
@@ -14,15 +17,15 @@ img = imread(imgFile);
 imshow(img);
 %displayBox(gtPointsBox, 'm');
 hold on;
-plot(gtP(1,:), gtP(2,:), 'bo');
-box = minBoundingBox(gtP);
-displayEightBox(box,'r');  
-tanValue = (box(2,2)-box(2,1))/(box(1,2)-box(1,1));
-if tanValue > pi/2
-    tanValue = 1/tanValue;
-end
-theta = atan(tanValue);
-bb = rectA(box, theta);
-%bb = rectA(box, 0.680267);
-displayEightBox(bb, 'g');
+%plot(gtP(1,:), gtP(2,:), 'bo');
+poly = minBoundingBox(gtP);
+displayEightBox(poly,'g');  
+
+[angleBox, anglePoly] = getAngleBox(poly);
+ 
+ fprintf('theta = %f\n', angleBox(5)); 
+ %bb = rectA(box, 0.680267);
+displayEightBox(anglePoly, 'm');
+displayBox(angleBox, 'b');
+displayPoly(angleBox, 'y');
 axis equal;
